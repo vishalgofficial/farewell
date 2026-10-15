@@ -1,64 +1,64 @@
-import vishal from "@/assets/photos/vishal-makerspace.jpg.asset.json";
-import makerspace from "@/assets/photos/makerspace-team.jpg.asset.json";
-import hackathon from "@/assets/photos/hackathon.jpg.asset.json";
-import codedrive from "@/assets/photos/codedrive-team.jpg.asset.json";
-import codeForChange from "@/assets/photos/code-for-change.jpg.asset.json";
-import trio from "@/assets/photos/codedrive-trio.jpg.asset.json";
-import della from "@/assets/photos/della-offsite.jpg.asset.json";
-import cfcHack from "@/assets/photos/code-for-change-hackathon.jpg.asset.json";
-import outing from "@/assets/photos/parsi-dhaba-outing.jpg.asset.json";
-import dinner from "@/assets/photos/team-dinner.jpg.asset.json";
+import vishal from "@/assets/photos/vishal-makerspace.jpg";
+import makerspace from "@/assets/photos/makerspace-team.jpg";
+import hackathon from "@/assets/photos/hackathon.jpg";
+import codedrive from "@/assets/photos/codedrive-team.jpg";
+import codeForChange from "@/assets/photos/code-for-change.jpg";
+import trio from "@/assets/photos/codedrive-trio.jpg";
+import della from "@/assets/photos/della-offsite.jpg";
+import cfcHack from "@/assets/photos/code-for-change-hackathon.jpg";
+import outing from "@/assets/photos/parsi-dhaba-outing.jpg";
+import dinner from "@/assets/photos/team-dinner.jpg";
 
 export type Photo = { src: string; alt: string; caption: string };
 
 export const photos = {
   vishal: {
-    src: vishal.url,
+    src: vishal,
     alt: "Vishal at the Foundry R&D Makerspace",
     caption: "Agent on site · Makerspace",
   },
   makerspace: {
-    src: makerspace.url,
+    src: makerspace,
     alt: "Foundry R&D team at the Makerspace sign",
     caption: "The Makerspace crew",
   },
   hackathon: {
-    src: hackathon.url,
+    src: hackathon,
     alt: "Team selfie during a hackathon",
     caption: "Hackathon mode: on",
   },
   codedrive: {
-    src: codedrive.url,
+    src: codedrive,
     alt: "Team in codedrive 008 t-shirts in front of the Mastercard wall",
     caption: "codedrive 008",
   },
   codeForChange: {
-    src: codeForChange.url,
+    src: codeForChange,
     alt: "Vishal with the Code for Change participants",
     caption: "Code for Change",
   },
   trio: {
-    src: trio.url,
+    src: trio,
     alt: "Vishal with two teammates in codedrive 008 t-shirts at the Mastercard wall",
     caption: "Partners in code",
   },
   dinner: {
-    src: dinner.url,
+    src: dinner,
     alt: "Team dinner around a wooden table",
     caption: "After hours, same team",
   },
   della: {
-    src: della.url,
+    src: della,
     alt: "The whole team at the Della Resorts offsite",
     caption: "Offsite at Della",
   },
   cfcHack: {
-    src: cfcHack.url,
+    src: cfcHack,
     alt: "Code for Change hackathon group photo on stage",
     caption: "Code for Change Hackathon",
   },
   outing: {
-    src: outing.url,
+    src: outing,
     alt: "Team outing at Parsi Dhaba under blue skies",
     caption: "Team day out",
   },
