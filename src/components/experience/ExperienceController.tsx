@@ -15,6 +15,7 @@ import { Quiz } from "./Quiz";
 import { AchievementToasts, BonusReel } from "./Overlays";
 import { StartGate } from "./StartGate";
 import { totalAchievements, unlock } from "@/lib/achievements";
+import { GlobalNoteAccess } from "./StickyNote";
 
 export function ExperienceController() {
   const [scene, setScene] = useState(0);
@@ -158,6 +159,7 @@ export function ExperienceController() {
           </motion.div>
         </AnimatePresence>
       </div>
+      <GlobalNoteAccess name={name} />
       <AchievementToasts onCount={onCount} />
       <BonusReel open={bonus} onClose={() => setBonus(false)} />
     </main>
