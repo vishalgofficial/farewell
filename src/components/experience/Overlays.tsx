@@ -231,10 +231,14 @@ export function Credits({
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
                 rows={5}
+                maxLength={5000}
                 placeholder="A memory, a thank-you, an inside joke…"
                 aria-label="Your note"
                 className="glass w-full resize-none p-4 text-sm outline-none focus:border-primary"
               />
+              <p className="text-right font-mono text-xs text-muted-foreground">
+                {note.length.toLocaleString()} / 5,000 characters
+              </p>
               <button
                 disabled={!note.trim()}
                 onClick={send}

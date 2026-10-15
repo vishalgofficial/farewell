@@ -9,6 +9,7 @@ type Note = { id: number; text: string; from: string; likes?: number };
 const colors = ["bg-note-1", "bg-note-2", "bg-note-3", "bg-note-4", "bg-note-5"];
 const emojis = ["💛", "🎉", "🚀", "✨", "🙌", "🥹"];
 const KEY = "vishal-notes";
+const MAX_NOTE_LENGTH = 5000;
 const tilts = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "rotate-1", "-rotate-2"];
 
 export function NoteWall({ name }: { name: string }) {
@@ -81,7 +82,7 @@ export function NoteWall({ name }: { name: string }) {
               animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
               whileHover={{ scale: 1.08, rotate: [0, -3, 3, 0], transition: { duration: 0.4 } }}
               transition={{ type: "spring", stiffness: 260, damping: 14 }}
-              className={`relative w-48 cursor-grab p-4 text-left text-note-ink shadow-xl active:cursor-grabbing ${colors[i % colors.length]} ${tilts[i % tilts.length]}`}
+              className={`relative w-72 max-w-full cursor-grab p-4 text-left text-note-ink shadow-xl active:cursor-grabbing ${colors[i % colors.length]} ${tilts[i % tilts.length]}`}
             >
               <span
                 aria-hidden
@@ -90,7 +91,9 @@ export function NoteWall({ name }: { name: string }) {
               <span aria-hidden className="absolute -right-2 -top-3 text-2xl">
                 {emojis[i % emojis.length]}
               </span>
-              <p className="font-serif text-base leading-snug">{n.text}</p>
+              <p className="whitespace-pre-wrap break-words font-serif text-base leading-snug">
+                {n.text}
+              </p>
               <div className="mt-3 flex items-center justify-between">
                 <p className="font-mono text-xs opacity-80">— {n.from}</p>
                 <motion.button
@@ -138,12 +141,15 @@ export function NoteWall({ name }: { name: string }) {
                 autoFocus
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                rows={4}
-                maxLength={200}
+                rows={8}
+                maxLength={MAX_NOTE_LENGTH}
                 placeholder="A memory, a thank-you, an inside joke…"
                 aria-label="Your note"
-                className="w-full rounded-lg border border-border bg-background/60 p-3 outline-none focus:border-primary"
+                className="w-full resize-y rounded-lg border border-border bg-background/60 p-3 outline-none focus:border-primary"
               />
+              <p className="text-right font-mono text-xs text-muted-foreground">
+                {text.length.toLocaleString()} / {MAX_NOTE_LENGTH.toLocaleString()} characters
+              </p>
               <input
                 value={from}
                 onChange={(e) => setFrom(e.target.value)}
