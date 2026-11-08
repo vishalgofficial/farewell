@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { neon } from "@neondatabase/serverless";
+import { database, type DatabaseQuery } from "./database";
 import { z } from "zod";
 
 export type SharedNote = {
@@ -18,13 +18,7 @@ const noteSchema = z.object({
 
 const likeSchema = z.object({ id: z.string().regex(/^\d+$/) });
 
-function database() {
-  const databaseUrl = process.env.DATABASE_URL;
-  if (!databaseUrl) throw new Error("The shared note database is not configured.");
-  return neon(databaseUrl);
-}
-
-async function ensureSchema(sql: ReturnType<typeof neon>) {
+async function ensureSchema(sql: DatabaseQuery) {
   await sql`
     CREATE TABLE IF NOT EXISTS farewell_notes (
       id BIGSERIAL PRIMARY KEY,
@@ -39,11 +33,11 @@ async function ensureSchema(sql: ReturnType<typeof neon>) {
 
 function toNote(row: Record<string, unknown>): SharedNote {
   return {
-    id: String(row.id),
-    text: String(row.message),
-    from: String(row.author),
-    likes: Number(row.likes),
-    createdAt: new Date(String(row.created_at)).toISOString(),
+    id: String(row["id"]),
+    text: String(row["message"]),
+    from: String(row["author"]),
+    likes: Number(row["likes"]),
+    createdAt: new Date(String(row["created_at"])).toISOString(),
   };
 }
 
@@ -69,6 +63,7 @@ export const createSharedNote = createServerFn({ method: "POST" })
       ON CONFLICT (client_id) DO UPDATE SET client_id = EXCLUDED.client_id
       RETURNING id, message, author, likes, created_at
     `;
+    if (!rows[0]) throw new Error("The note could not be saved.");
     return toNote(rows[0]);
   });
 
